@@ -9,6 +9,7 @@ class App extends Component {
 		balls: 0,
 	};
 
+	// strike function
 	strike = () => {
 		if (this.state.strikes <= 1) {
 			this.setState({ strikes: this.state.strikes + 1 });
@@ -16,6 +17,8 @@ class App extends Component {
 			this.setState({ strikes: 0, balls: 0 });
 		}
 	};
+
+	// ball function
 	balls = () => {
 		if (this.state.balls <= 2) {
 			this.setState({ balls: this.state.balls + 1 });
@@ -23,24 +26,33 @@ class App extends Component {
 			this.setState({ strikes: 0, balls: 0 });
 		}
 	};
+
+	// foul function
 	foul = () => {
 		if (this.state.strikes <= 1) {
 			this.setState({ strikes: this.state.strikes + 1 });
 		} else {
 			return;
 		}
-  };
-  hit=()=>{
-    this.setState({
-      strikes:0,
-      balls:0
-    })
-  }
+	};
+
+	// hit function
+	hit = () => {
+		this.setState({
+			strikes: 0,
+			balls: 0,
+		});
+	};
 	render() {
 		return (
 			<div className="App">
 				<h1>At-Bat</h1>
-				<Dashboard strike={this.strike} balls={this.balls} foul={this.foul} hit={this.hit} />
+				<Dashboard
+					strike={this.strike}
+					balls={this.balls}
+					foul={this.foul}
+					hit={this.hit}
+				/>
 				<Display balls={this.state.balls} strikes={this.state.strikes} />
 			</div>
 		);
