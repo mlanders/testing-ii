@@ -19,28 +19,84 @@ describe('<Dashboard />', () => {
 		const strikeButton = getByTestId('strikeBtn');
 
 		fireEvent.click(strikeButton);
-		console.log(getByTestId('strikes').textContent);
 
 		expect(getByTestId('strikes').textContent).toMatch(/strikes:\s[1]/i);
 
 		rerender(<Display />);
 		fireEvent.click(strikeButton);
-		console.log(getByTestId('strikes').textContent);
 		expect(getByTestId('strikes').textContent).toMatch(/strikes:\s[2]/i);
 
 		rerender(<Display />);
 		fireEvent.click(strikeButton);
-		console.log(getByTestId('strikes').textContent);
 		expect(getByTestId('strikes').textContent).toMatch(/strikes:\s[0]/i);
 
 		rerender(<Display />);
 		fireEvent.click(strikeButton);
-		console.log(getByTestId('strikes').textContent);
 		expect(getByTestId('strikes').textContent).toMatch(/strikes:\s[1]/i);
 
 		rerender(<Display />);
 		fireEvent.click(strikeButton);
-		console.log(getByTestId('strikes').textContent);
 		expect(getByTestId('strikes').textContent).toMatch(/strikes:\s[2]/i);
+	});
+	it('triggers a ball', () => {
+		render(<App />);
+		const { getByTestId } = render(<Dashboard />);
+		const { rerender } = render(<Display />);
+
+		const ballsButton = getByTestId('ballsBtn');
+
+		fireEvent.click(ballsButton);
+
+		expect(getByTestId('balls').textContent).toMatch(/balls:\s[1]/i);
+
+		rerender(<Display />);
+		fireEvent.click(ballsButton);
+		expect(getByTestId('balls').textContent).toMatch(/balls:\s[2]/i);
+
+		rerender(<Display />);
+		fireEvent.click(ballsButton);
+		expect(getByTestId('balls').textContent).toMatch(/balls:\s[3]/i);
+
+		rerender(<Display />);
+		fireEvent.click(ballsButton);
+		expect(getByTestId('balls').textContent).toMatch(/balls:\s[0]/i);
+
+		rerender(<Display />);
+		fireEvent.click(ballsButton);
+		expect(getByTestId('balls').textContent).toMatch(/balls:\s[1]/i);
+	});
+	it('triggers a foul', () => {
+		render(<App />);
+		const { getByTestId } = render(<Dashboard />);
+		const { rerender } = render(<Display />);
+
+		const foulButton = getByTestId('foulBtn');
+
+		fireEvent.click(foulButton);
+
+		expect(getByTestId('balls').textContent).toMatch(/balls:\s[0]/i);
+		expect(getByTestId('strikes').textContent).toMatch(/strikes:\s[1]/i);
+
+		rerender(<Display />);
+		fireEvent.click(foulButton);
+		expect(getByTestId('balls').textContent).toMatch(/balls:\s[0]/i);
+		expect(getByTestId('strikes').textContent).toMatch(/strikes:\s[2]/i);
+
+		rerender(<Display />);
+		fireEvent.click(foulButton);
+		expect(getByTestId('balls').textContent).toMatch(/balls:\s[0]/i);
+		expect(getByTestId('strikes').textContent).toMatch(/strikes:\s[2]/i);
+	});
+	it('triggers a hit', () => {
+		render(<App />);
+		render(<Display />);
+		const { getByTestId } = render(<Dashboard />);
+
+		const hitButton = getByTestId('hitBtn');
+
+		fireEvent.click(hitButton);
+
+		expect(getByTestId('balls').textContent).toMatch(/balls:\s[0]/i);
+		expect(getByTestId('strikes').textContent).toMatch(/strikes:\s[0]/i);
 	});
 });
